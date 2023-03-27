@@ -30,8 +30,9 @@ class Reader:
         try:
             with open(filepath, "rb") as f:
                 json_file = json.loads(f.read())
+                # Return models
                 if validate_data(json_file):
-                    return json_file
+                    return json_file["layers"], json_file['activation_functions'], json_file['neurons'], json_file['weights']
                 return None
         except OSError as e:
             print("File not found")
