@@ -1,0 +1,10 @@
+{
+  "layers": 3,
+  "activation_functions": [0, 1, 2],
+  "neurons": [1, 2, 3],
+  "weights": [
+    [1, 2],
+    [1, 2, 3],
+    [1, 2, 3, 4]
+  ]
+}
