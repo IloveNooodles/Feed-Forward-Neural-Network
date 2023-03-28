@@ -84,4 +84,6 @@ def validate_data(json_data) -> bool:
 
 if __name__ == "__main__":
     data = Reader.read_ffnn("./test/test.json")
+    data2 = datasets.load_breast_cancer()
     print(data)
+    print(data2)

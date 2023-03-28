@@ -10,18 +10,23 @@ class FFNN:
         self.activation_functions = activation_functions
         self.neurons = neurons
         self.weights = weights
+        self.epochs = None
+        self.batch_size = None
         pass
 
     def __str__(self) -> str:
         return f"Layers: {self.layers}\nActivations: {self.activation_functions}\nNeurons: {self.neurons}\nWeights: {self.weights}"
 
+    def set_data():
+        pass
+
     def compute():
         pass
 
-    def predict_one():
+    def predict():
         pass
-    
-    def predict_many():
+
+    def predict_classes():
         pass
 
 
