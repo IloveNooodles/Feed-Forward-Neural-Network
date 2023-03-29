@@ -9,23 +9,20 @@ class Activation:
     SIGMOID = 2
     SOFTMAX = 3
 
-    def __init__(self, mode, weights, input_neuron, attribute) -> None:
+    def __init__(self, mode) -> None:
         self.mode = mode
-        self.num_attribute = attribute
-        self.weights = weights
-        self.input_neuron = input_neuron
 
-    def __linear(self, res):
+    def __linear_calculate(self, res):
         return res
 
-    def __sigmoid(self, res):
+    def __sigmoid_calculate(self, res):
         return [(1 / (1 + pow(math.e, -x))) for x in res]
 
-    def __relu(self, res):
+    def __relu_calculate(self, res):
         res[res < 0] = 0
         return res
 
-    def __softmax(self, res):
+    def __softmax_calculate(self, res):
         numerator = np.array([pow(math.e, x) for x in res])
         denominator = np.sum([pow(math.e, x) for x in res])
         return numerator / denominator
@@ -34,28 +31,40 @@ class Activation:
         res = np.matmul(x, w)
         res = np.add(res, b)
         if self.mode == Activation.LINEAR:
-            return self.__linear(res)
+            return self.__linear_calculate(res)
         elif self.mode == Activation.RELU:
-            return self.__relu(res)
+            return self.__relu_calculate(res)
         elif self.mode == Activation.SIGMOID:
-            return self.__sigmoid(res)
+            return self.__sigmoid_calculate(res)
         elif self.mode == Activation.SOFTMAX:
-            return self.__softmax(res)
+            return self.__softmax_calculate(res)
         else:
             raise Exception(
                 "Mode is not implemented, please select correct mode")
 
+    def calculate_one(self, res):
+        if self.mode == Activation.LINEAR:
+            return self.__linear_calculate(res)
+        elif self.mode == Activation.RELU:
+            return self.__relu_calculate(res)
+        elif self.mode == Activation.SIGMOID:
+            return self.__sigmoid_calculate(res)
+        elif self.mode == Activation.SOFTMAX:
+            return self.__softmax_calculate(res)
+        else:
+            raise Exception(
+                "Mode is not implemented, please select correct mode")
+    
 
 if __name__ == "__main__":
-
-    # x = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
-    # w1 = np.array([[1, 1], [1, 1]])
-    # b1 = np.array([0, -1])
-    # res = np.matmul(x, w1)
-    # res = np.add(res, b1)
-    # print(res)
-    # res[res < 0] = 0
-    # print(res)
+    x = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
+    w1 = np.array([[1, 1], [1, 1]])
+    b1 = np.array([0, -1])
+    res = np.matmul(x, w1)
+    res = np.add(res, b1)
+    print(res)
+    res[res < 0] = 0
+    print(res)
 
     # w = np.array([1, -2])
     # res = np.matmul(res, w)
