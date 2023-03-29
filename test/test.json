@@ -1,11 +1,13 @@
 {
   "layers": 3,
   "activation_functions": [0, 1, 2],
-  "neurons": [1, 2, 3],
+  "neurons": [3, 2, 1],
   "weights": [
-    [1, 2],
-    [1, 2, 3],
-    [1, 2, 3, 4]
+    [
+      [1.0, 2.0, 3.0, 4.0],
+      [2, 3, 4, 5]
+    ],
+    [[4, 5, 6]]
   ],
   "rows": 23,
   "data_names": ["mean radius", "mean texture", "mean perimeter"],
@@ -27,5 +29,7 @@
     ]
   ],
   "target_names": ["malignant", "benign"],
-  "target": [0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0]
+  "target": [
+    0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1
+  ]
 }
