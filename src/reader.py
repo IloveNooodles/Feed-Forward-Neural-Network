@@ -97,8 +97,11 @@ def validate_data(json_data) -> bool:
     assert np.issubdtype(data_names.dtype, np.string_) == True
 
     # data attr
-    if data.shape[0] != len_data_features:
-        raise Exception("Number of data doesn't match")
+    if data.shape[0] != rows:
+        raise Exception("Number of data doesn't match with rows")
+
+    if data.shape[1] != len_data_features:
+        raise Exception("Number of data columns doesnt match")
 
     assert np.issubdtype(target_names.dtype, np.string_) == True
     assert target.shape[0] == rows
