@@ -1,5 +1,3 @@
-from typing import List
-
 import numpy as np
 
 from activation import Activation
@@ -7,7 +5,7 @@ from reader import Reader
 
 
 class FFNN:
-    def __init__(self, model, epochs=1, batch_size=1) -> None:
+    def __init__(self, model) -> None:
         self.layers = model['layers']
         self.activation_functions = np.array(model['activation_functions'])
         self.neurons = np.array(model['neurons'])
@@ -17,8 +15,6 @@ class FFNN:
         self.data = np.array(model['data'])
         self.target = np.array(model['target'])
         self.target_names = np.array(model['target_names'])
-        self.epochs = epochs
-        self.batch_size = batch_size
         self.output = None
         pass
 
@@ -32,9 +28,7 @@ class FFNN:
   Data: {self.data}\n\
   Data_names: {self.data_names}\n\
   target: {self.target}\n\
-  target_names: {self.target_names}\n\
-  epochs: {self.epochs}\n\
-  batch_size: {self.batch_size}\n"
+  target_names: {self.target_names}\n"
 
     # Will return output functions
     def compute(self):
@@ -44,6 +38,7 @@ class FFNN:
             transposed_weights = np.transpose(np.array(self.weights[i]))
             weights, bias = self._separate_bias(transposed_weights)
             res = activation_function.calculate(res, weights, bias)
+            # print(res)
 
         self.output = res
         return res
@@ -58,18 +53,19 @@ class FFNN:
         weight = data[1:, :]
         return weight, bias
 
-    def predict(self, instances):
-        activation_function = Activation(self.activation_functions[-1])
-        res = activation_function.calculate_one(instances)
-
-    def predict_classes(self):
-        pass
+    def predict(self):
+        self.compute()
+        print(f"\
+  Data Names: {self.data_names}\n\
+  Data: {self.data}\n\
+  Target Names: {self.target_names}\n\
+  Target: {self.target}\n\
+  Predictions: {np.transpose(self.output)}\n")
 
 
 if __name__ == "__main__":
-    model = Reader.read_ffnn("./test/xor.json")
+    model = Reader.read_ffnn("./test/xor_linear_relu.json")
     a = FFNN(model=model)
-    output_function = a.compute()
-    print(output_function)
+    a.predict()
     # print(type(a.data))
     # print(a)

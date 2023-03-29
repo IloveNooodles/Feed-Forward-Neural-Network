@@ -17,8 +17,8 @@ class Activation:
 
     def __sigmoid_calculate(self, res):
         res = np.array([(1 / (1 + pow(math.e, -x))) for x in res])
-        res[res < 1e-4] = 0
-        res[res >= 1e-4] = 1
+        res[res < 1e-3] = 0
+        res[res >= 1e-3] = 1
         return res
 
     def __relu_calculate(self, res):
