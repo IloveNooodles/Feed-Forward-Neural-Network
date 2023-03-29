@@ -16,7 +16,10 @@ class Activation:
         return res
 
     def __sigmoid_calculate(self, res):
-        return [(1 / (1 + pow(math.e, -x))) for x in res]
+        res = np.array([(1 / (1 + pow(math.e, -x))) for x in res])
+        res[res < 1e-4] = 0
+        res[res >= 1e-4] = 1
+        return res
 
     def __relu_calculate(self, res):
         res[res < 0] = 0
@@ -54,7 +57,7 @@ class Activation:
         else:
             raise Exception(
                 "Mode is not implemented, please select correct mode")
-    
+
 
 if __name__ == "__main__":
     x = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])

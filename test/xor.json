@@ -1,0 +1,22 @@
+{
+  "layers": 3,
+  "activation_functions": [1, 1, 1],
+  "neurons": [2, 2, 1],
+  "weights": [
+    [
+      [-10, 20, 20],
+      [30, -20, -20]
+    ],
+    [[-30, 20, 20]]
+  ],
+  "rows": 4,
+  "data_names": ["x1", "x2"],
+  "data": [
+    [0, 0],
+    [0, 1],
+    [1, 0],
+    [1, 1]
+  ],
+  "target_names": ["malignant", "benign"],
+  "target": [0, 0, 1, 0]
+}

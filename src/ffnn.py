@@ -56,22 +56,20 @@ class FFNN:
     def _separate_bias(self, data):
         bias = data[0, :]
         weight = data[1:, :]
-        print(weight, bias)
         return weight, bias
 
     def predict(self, instances):
         activation_function = Activation(self.activation_functions[-1])
         res = activation_function.calculate_one(instances)
-        print(res)
 
     def predict_classes(self):
         pass
 
 
 if __name__ == "__main__":
-    model = Reader.read_ffnn("./test/test.json")
+    model = Reader.read_ffnn("./test/xor.json")
     a = FFNN(model=model)
     output_function = a.compute()
-    
+    print(output_function)
     # print(type(a.data))
     # print(a)
