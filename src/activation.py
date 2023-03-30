@@ -17,8 +17,8 @@ class Activation:
 
     def __sigmoid_calculate(self, res):
         res = np.array([(1 / (1 + pow(math.e, -x))) for x in res])
-        res[res < 1e-3] = 0
-        res[res >= 1e-3] = 1
+        # res[res < 1e-3] = 0
+        # res[res >= 1e-3] = 1
         return res
 
     def __relu_calculate(self, res):
@@ -45,13 +45,15 @@ class Activation:
             raise Exception(
                 "Mode is not implemented, please select correct mode")
 
-    def calculate_one(self, res):
+    def predict(self, res):
         if self.mode == Activation.LINEAR:
-            return self.__linear_calculate(res)
+            return res
         elif self.mode == Activation.RELU:
-            return self.__relu_calculate(res)
+            return res
         elif self.mode == Activation.SIGMOID:
-            return self.__sigmoid_calculate(res)
+            res[res < 0.5] = 0
+            res[res > 0.5] = 1
+            return res
         elif self.mode == Activation.SOFTMAX:
             return self.__softmax_calculate(res)
         else:

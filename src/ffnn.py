@@ -55,17 +55,21 @@ class FFNN:
 
     def predict(self):
         self.compute()
+        A = Activation(self.activation_functions[-1])
+        res = A.predict(self.output)
         print(f"\
   Data Names: {self.data_names}\n\
   Data: {self.data}\n\
   Target Names: {self.target_names}\n\
   Target: {self.target}\n\
-  Predictions: {np.transpose(self.output)}\n")
+  Predictions: {np.transpose(res)}\n")
+  # Predictions: {np.transpose(self.res)}\n")
 
 
 if __name__ == "__main__":
     model = Reader.read_ffnn("./test/xor_linear_relu.json")
     a = FFNN(model=model)
+    a.compute()
     a.predict()
     # print(type(a.data))
     # print(a)
