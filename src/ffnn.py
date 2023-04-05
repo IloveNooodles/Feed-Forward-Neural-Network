@@ -16,6 +16,7 @@ class FFNN:
         self.target = np.array(model['target'])
         self.target_names = np.array(model['target_names'])
         self.output = None
+        self.max_sse = model["max_sse"]
         pass
 
     def __str__(self) -> str:
@@ -28,7 +29,8 @@ class FFNN:
   Data: {self.data}\n\
   Data_names: {self.data_names}\n\
   target: {self.target}\n\
-  target_names: {self.target_names}\n"
+  target_names: {self.target_names}\n\
+  max_sse: {self.max_sse}\n"
 
     # Will return output functions
     def compute(self):
@@ -50,12 +52,22 @@ class FFNN:
     def predict(self):
         A = Activation(self.activation_functions[-1])
         res = A.predict(self.output)
+        sse = self._calculate_sse()
         print(f"\
   Data Names: {self.data_names}\n\
   Data: {self.data}\n\
   Target Names: {self.target_names}\n\
   Target: {self.target}\n\
-  Predictions: {res}\n")
+  Predictions: {res}\n\
+  SSE: {sse}\n\
+  isValid: {[s < self.max_sse for s in sse]} ( < 1e-6)\n")
+
+    def _calculate_sse(self):
+        sse = 0
+        for i in range(len(self.output)):
+            sse += pow(self.output[i] - self.target[i], 2)
+        sse = sse / len(self.target)
+        return sse
 
 
 if __name__ == "__main__":

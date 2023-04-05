@@ -53,6 +53,7 @@ def validate_data(json_data) -> bool:
     data_names = np.array(json_data['data_names'], dtype=np.string_)
     target_names = np.array(json_data['target_names'], dtype=np.string_)
     target = np.array(json_data['target'], dtype=np.int32)
+    max_sse = json_data['max_sse']
 
     if not isinstance(layers, int):
         raise Exception("Layers is not integer")
@@ -99,6 +100,10 @@ def validate_data(json_data) -> bool:
 
     assert np.issubdtype(target_names.dtype, np.string_) == True
     assert target.shape[0] == rows
+
+    if not isinstance(max_sse, float):
+        raise Exception("Please input correct sse")
+
     return True
 
 
