@@ -2,7 +2,6 @@ import json
 import os
 
 import numpy as np
-import pandas as pd
 
 from .activation import Activation
 
@@ -13,14 +12,6 @@ ACTIVATION_LIST = [Activation.LINEAR, Activation.RELU,
 class Reader:
     def __init__(self) -> None:
         pass
-
-    @staticmethod
-    def read_data_excel(self, filepath: str):
-        self.filepath = filepath
-        df = pd.read_excel(filepath, index_col=False)
-        if not df['target']:
-            raise ("Dataset must have target attribute")
-        return df
 
     """ 
     FFNN models are json like

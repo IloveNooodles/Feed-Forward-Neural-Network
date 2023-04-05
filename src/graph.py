@@ -1,5 +1,5 @@
-import graphviz
 import numpy as np
+from graphviz import Digraph
 
 from .ffnn import FFNN
 
@@ -8,7 +8,7 @@ class Graph:
     def __init__(self, ffnn: FFNN, filename: str) -> None:
         self.ffnn = ffnn
         self.filename = filename
-        self.f = graphviz.Digraph(
+        self.f = Digraph(
             'G', filename=f'./res/{self.filename}_graph', format='png')
 
     def draw(self):
