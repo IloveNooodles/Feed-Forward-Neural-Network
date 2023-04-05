@@ -1,6 +1,6 @@
 {
   "layers": 3,
-  "activation_functions": [2, 2, 2],
+  "activation_functions": ["sigmoid", "sigmoid"],
   "neurons": [2, 2, 1],
   "weights": [
     [
@@ -18,5 +18,5 @@
     [1, 1]
   ],
   "target_names": ["false", "true"],
-  "target": [0, 1, 1, 0]
+  "target": [[0], [1], [1], [0]]
 }
