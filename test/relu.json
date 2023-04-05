@@ -13,5 +13,6 @@
   "data_names": ["x1", "x2"],
   "data": [[-1.0, 0.5]],
   "target_names": ["false", "true"],
-  "target": [[0.05, 1.1, 0.0]]
+  "target": [[0.05, 1.1, 0.0]],
+  "max_sse": 0.000001
 }
