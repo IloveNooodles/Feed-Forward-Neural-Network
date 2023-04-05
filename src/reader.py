@@ -3,9 +3,8 @@ import os
 
 import numpy as np
 import pandas as pd
-from sklearn import datasets
 
-from activation import Activation
+from .activation import Activation
 
 ACTIVATION_LIST = [Activation.LINEAR, Activation.RELU,
                    Activation.SIGMOID, Activation.SOFTMAX]

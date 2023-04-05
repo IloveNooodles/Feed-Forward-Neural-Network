@@ -1,7 +1,7 @@
 import numpy as np
 
-from activation import Activation
-from reader import Reader
+from .activation import Activation
+from .reader import Reader
 
 
 class FFNN:
@@ -36,25 +36,18 @@ class FFNN:
         for i in range(self.layers - 1):
             activation_function = Activation(self.activation_functions[i])
             transposed_weights = np.transpose(np.array(self.weights[i]))
-            weights, bias = self._separate_bias(transposed_weights)
+            weights, bias = self.separate_bias(transposed_weights)
             res = activation_function.calculate(res, weights, bias)
-            # print(res)
 
         self.output = res
         return res
 
-    def _add_bias(self, data):
-        temp_data = np.ones((data.shape[0], data.shape[0] + 1))
-        temp_data[:, 1:] = data
-        return temp_data
-
-    def _separate_bias(self, data):
+    def separate_bias(self, data):
         bias = data[0, :]
         weight = data[1:, :]
         return weight, bias
 
     def predict(self):
-        self.compute()
         A = Activation(self.activation_functions[-1])
         res = A.predict(self.output)
         print(f"\
@@ -71,5 +64,3 @@ if __name__ == "__main__":
     a = FFNN(model=model)
     a.compute()
     a.predict()
-    # print(type(a.data))
-    # print(a)

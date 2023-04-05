@@ -17,8 +17,8 @@ class Activation:
 
     def __sigmoid_calculate(self, res):
         res = np.array([(1 / (1 + pow(math.e, -x))) for x in res])
-        # res[res < 1e-3] = 0
-        # res[res >= 1e-3] = 1
+        res[res < 1e-3] = 0
+        res[res >= 1e-3] = 1
         return res
 
     def __relu_calculate(self, res):
@@ -51,11 +51,9 @@ class Activation:
         elif self.mode == Activation.RELU:
             return res
         elif self.mode == Activation.SIGMOID:
-            res[res < 0.5] = 0
-            res[res > 0.5] = 1
             return res
         elif self.mode == Activation.SOFTMAX:
-            return self.__softmax_calculate(res)
+            return res
         else:
             raise Exception(
                 "Mode is not implemented, please select correct mode")
