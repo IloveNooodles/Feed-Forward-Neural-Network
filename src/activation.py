@@ -4,10 +4,10 @@ import numpy as np
 
 
 class Activation:
-    LINEAR = 0
-    RELU = 1
-    SIGMOID = 2
-    SOFTMAX = 3
+    LINEAR = "linear"
+    RELU = "relu"
+    SIGMOID = "sigmoid"
+    SOFTMAX = "softmax"
 
     def __init__(self, mode) -> None:
         self.mode = mode
@@ -17,8 +17,6 @@ class Activation:
 
     def __sigmoid_calculate(self, res):
         res = np.array([(1 / (1 + pow(math.e, -x))) for x in res])
-        res[res < 1e-3] = 0
-        res[res >= 1e-3] = 1
         return res
 
     def __relu_calculate(self, res):

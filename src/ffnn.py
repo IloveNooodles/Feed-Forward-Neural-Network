@@ -55,8 +55,7 @@ class FFNN:
   Data: {self.data}\n\
   Target Names: {self.target_names}\n\
   Target: {self.target}\n\
-  Predictions: {np.transpose(res)}\n")
-  # Predictions: {np.transpose(self.res)}\n")
+  Predictions: {res}\n")
 
 
 if __name__ == "__main__":

@@ -43,7 +43,7 @@ def validate_data(json_data) -> bool:
     # Validate layers
     layers = json_data['layers']
     activation_functions = np.array(
-        json_data['activation_functions'], dtype=np.int32)
+        json_data['activation_functions'], dtype=np.string_)
 
     # Neurons are input hidden output
     neurons = np.array(json_data['neurons'], dtype=np.int32)
@@ -57,18 +57,13 @@ def validate_data(json_data) -> bool:
     if not isinstance(layers, int):
         raise Exception("Layers is not integer")
 
-    if layers < 3:
-        raise Exception("Layers minimal have value of 3 (input, hidden, end)")
-
-    # # Validate activation function per layers
-    if activation_functions.shape[0] != layers:
+    # Validate activation function per layers
+    if activation_functions.shape[0] != layers - 1:
         raise Exception("Length of activation functions is not the same")
 
-    assert activation_functions.dtype == np.int32
-
     for function in activation_functions:
-        if function not in ACTIVATION_LIST:
-            raise Exception("Invalid exception")
+        if function.decode() not in ACTIVATION_LIST:
+            raise Exception("Invalid activation functions")
 
     # # Validate neurons
     if neurons.shape[0] != layers:

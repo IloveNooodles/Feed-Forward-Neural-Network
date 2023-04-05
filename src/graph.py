@@ -32,24 +32,33 @@ class Graph:
 
     def _add_edge(self):
         # Add edges between layers
-        for layer in range(self.ffnn.layers - 1):
+        layers = self.ffnn.layers
+
+        for layer in range(layers - 1):
             transposed_weights = np.transpose(
                 np.array(self.ffnn.weights[layer]))
             weights, bias = self.ffnn.separate_bias(transposed_weights)
 
             # Add edges between bias and hidden layer or output
             for i in range(len(bias)):
-                bias_name = f"b{layer+1}"
-                end = f"h{layer+1}{i+1}"
-                if layer == self.ffnn.layers - 2:
+                if layers == 2:
+                    bias_name = f"b{layer+1}"
                     end = f"y{i+1}"
+                else:
+                    bias_name = f"b{layer+1}"
+                    end = f"h{layer+1}{i+1}"
+                    if layer == self.ffnn.layers - 2:
+                        end = f"y{i+1}"
 
                 self.f.edge(bias_name, end, label=f"{bias[i]}")
 
             # Add edges between input and hidden layer or output
             for i in range(self.ffnn.neurons[layer]):
                 for j in range(len(weights[i])):
-                    if layer == 0:
+                    if layers == 2:
+                        start = self.ffnn.data_names[i]
+                        end = f"y{j+1}"
+                    elif layer == 0:
                         start = self.ffnn.data_names[i]
                         end = f"h{layer+1}{j+1}"
                     elif layer == self.ffnn.layers - 2:

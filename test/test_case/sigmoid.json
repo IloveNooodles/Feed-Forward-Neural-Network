@@ -1,0 +1,25 @@
+{
+    "case": {
+        "model": {
+            "input_size": 2,
+            "layers": [
+                {
+                    "number_of_neurons": 3,
+                    "activation_function": "sigmoid"
+                }
+            ]
+        },
+        "input": [[0.2, 0.4]],
+        "weights": [
+            [
+                [0.4, 0.2, 0.1],
+                [0.2, 0.4, 0.2],
+                [0.1, 0.2, 0.4]
+            ]
+        ]
+    },
+    "expect": {
+        "output": [[0.617747], [0.589040], [0.574442]],
+        "max_sse": 0.000001
+    }
+}
