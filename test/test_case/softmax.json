@@ -1,0 +1,25 @@
+{
+    "case": {
+        "model": {
+            "input_size": 2,
+            "layers": [
+                {
+                    "number_of_neurons": 3,
+                    "activation_function": "softmax"
+                }
+            ]
+        },
+        "input": [[1.0, 2.0]],
+        "weights": [
+            [
+                [1.0, 2.0, 3.0],
+                [2.0, 1.0, 3.0],
+                [3.0, 2.0, 1.0]
+            ]
+        ]
+    },
+    "expect": {
+        "output": [[0.665241], [0.090031], [0.244728]],
+        "max_sse": 0.000001
+    }
+}

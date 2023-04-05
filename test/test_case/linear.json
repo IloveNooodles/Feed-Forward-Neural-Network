@@ -1,0 +1,25 @@
+{
+  "case": {
+    "model": {
+      "input_size": 2,
+      "layers": [
+        {
+          "number_of_neurons": 3,
+          "activation_function": "linear"
+        }
+      ]
+    },
+    "input": [[3.0, 1.0]],
+    "weights": [
+      [
+        [0.2, 0.3, 0.1],
+        [0.5, 0.2, -0.8],
+        [0.3, -0.6, 0.4]
+      ]
+    ]
+  },
+  "expect": {
+    "output": [[2.0, 0.3, -1.9]],
+    "max_sse": 0.000001
+  }
+}
