@@ -66,7 +66,7 @@ class FFNN:
         sse = 0
         for i in range(len(self.output)):
             sse += pow(self.output[i] - self.target[i], 2)
-        sse = sse / len(self.target)
+        sse = sse / 2
         return sse
 
 
